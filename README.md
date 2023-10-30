@@ -11,3 +11,4 @@
 11 To implement Software Configuration Management and provisioning using Puppet Blocks(Manifest, Modules)        
 12 To install and configure software configuration management using Ansible     
 https://github.com/ravdy/hello-world/tree/master = Exp5: To create and build a CI/CD pipeline in Jenkins to test and deploy an application over  the tomcat server   
+https://signoz.io/blog/docker-container-lifecycle/ = Exp8: To demonstrate container lifecycle using various docker commands
