@@ -1,7 +1,7 @@
 # Devopslab
-2 To perform installation of Git and work on local and remote Git repositories
-3 To understand and perform version control system / source code management using Git
-4 To install and configure Jenkins to test and deploy an application with Maven
+2 To perform installation of Git and work on local and remote Git repositories \n
+3 To understand and perform version control system / source code management using Git \n
+4 To install and configure Jenkins to test and deploy an application with Maven \n
 5 To create and build a CI/CD pipeline in Jenkins to test and deploy an application over the tomcat server
 6 To implement Jenkins Master-Slave Architecture with Scaling 
 7 To perform continuous testing of web application using Selenium
