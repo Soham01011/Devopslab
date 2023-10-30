@@ -9,4 +9,5 @@
 9 To build an image for a sample web application from a docker file using various docker file instructions        
 10 To install and provision master-slave configuration of Puppet by using AWS        
 11 To implement Software Configuration Management and provisioning using Puppet Blocks(Manifest, Modules)        
-12 To install and configure software configuration management using Ansible        
+12 To install and configure software configuration management using Ansible     
+https://github.com/ravdy/hello-world/tree/master = Exp5: To create and build a CI/CD pipeline in Jenkins to test and deploy an application over  the tomcat server   
