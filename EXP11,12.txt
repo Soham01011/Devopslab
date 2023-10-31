@@ -1,0 +1,139 @@
+EXP11 Aim: To understand AWS Lambda, its workflow, various functions and create your
+first Lambda functions using Python / Java / Nodejs.
+1) check server > n. Virginia
+2) services search for lambda (under compute section)
+3) create function 
+	Author from scratch
+	Function name = sum
+	Runtime = Python
+	Architecture = x86_64
+	Change deafult execution role ( dropdown ) > Create a new role with basic Lambda permissions
+  ---Take ss---
+4) create function
+  ---Take ss--- 
+ now scroll down to code source and edit lambda_funciton.py add this code:
+
+import json
+
+def lambda_handler(event, context):
+	first_number = 100
+	second_number = 200
+	sum = first_number + second_number 
+	return sum
+ ---Take ss---
+5) now click on drop down of test button > configuration test event
+	test event action : create new event 
+	Event Name : hello-world
+	Event sharing settings : private
+	template : hello-world ( by default, it is taken form Event Name)
+	Event JSON:
+{
+
+}
+(put these empty brackets)
+---Take ss---
+	save
+
+6)Click on the Deploy button beside to the test button > now click on Test button > Execution result sub tab will open :
+(EXPECTED OUTPUT)
+	Test Event Name :
+		hello-world
+	Response
+		300
+---Take SS---
+7) Now create another lambda function 
+	services > lambda > create function
+	Author from scratch
+	Function name = name
+	Runtime = Python
+	Architecture = x86_64
+	Change deafult execution role ( dropdown ) > Create a new role with basic Lambda permissions
+---Take SS---
+8) now scroll down to code source and edit lambda_funciton.py add this code: 
+def lambda_handler (event, context):
+	if event["name"] == "Soham"; (replace your name)
+	return "apsit"
+
+9) click on the dropdown of the test button > Configure test event
+Test event action > Create new event 
+	Event name : name
+	Event sharing settings : Private
+	Template : hello-world (by default or myabe the same if you changed previously)
+	Event JSON:
+{
+   "name": "soham"
+      }
+(Change it to your name)
+---Take ss---
+save
+
+10) Click on Deploy > button beside to test after that click on the test button 
+	Execution result (OUTPUT):
+	Test Event Name
+	name
+
+	Response
+	"soham"
+---Take ss---
+
+	
+EXP12:Aim: To create a Lambda function which will log “An Image has been added” once you add an object to a specific bucket in S3
+1) check server > n. Virginia
+2)services search for S3(under compute storage)
+3)Create bucket 
+	Bucketname : adlsucks (Change the name)
+	AWS Region : US east (n. virginia)us-east-1
+--take ss--
+	create bucket 
+4)Service search for IAM (under compute storage Security, Identity, & Compliance)
+	Leftside dashboard > Access management > Roles
+	Create Role:
+		Trusted entity type: AWS service
+		Use Case : Lambda
+		permissions : AmazonS3FullAccess, AWSLambda_FullAccess and CloudWatchFullAccess (click on checkboxes)
+		Next
+		Role name : Sohamrole
+  ----Take SS of role name , role description , permissions ---
+		create role
+
+5)services search for lambda (under compute section)
+Create Function :
+	Author from scratch
+	Function name : lambdatrigger
+	runtime : node.js
+	architecture : x86_64
+	Change default execution role(dropdown) : Use an existing role > dropdown will appear >select Sohamrole (or role name you gave)
+	---Take ss---
+	create function
+
+6) Function overview > add trigger
+	Select a source : S3
+	Bucket : adlsucks (or the bucket you created)
+	Event types : All object create events (selected by default)
+	Suffix : .jpg  (keep prefix empty)
+	tick the I acknowledge check box 
+	---take ss---
+7) scroll down and open the code tab :
+index.mjs:
+exports.handler = function(event, context, callback){
+    console.log('incoming event: ',event);
+    const bucket = event.Records[0].s3.bucket.name;
+    const filename = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+    const message = `An image has been added - ${bucket} -> ${filename}`;
+    console.log(message);
+    callback(null,message);
+    
+};
+
+click on deploy > test :
+	Test event action : Create new event
+	Event name : exp12
+	Event sharing settings: Private
+	Template : exp12
+	Event JSON :
+{
+
+}
+(in event json these brackets are suppose to be empty)
+
+
